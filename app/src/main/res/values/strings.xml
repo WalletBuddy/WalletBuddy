@@ -6,4 +6,8 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_log_in">logInActivity</string>
     <string name="title_activity_reset">ResetActivity</string>
+    <string name="title_activity_home_page">HomePage</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_transaction_list">TransactionListActivity</string>
+    <string name="title_activity_budget_category">BudgetCategoryActivity</string>
 </resources>

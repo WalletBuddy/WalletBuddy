@@ -19,8 +19,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button register = (Button)findViewById(R.id.Register);
-        register.setOnClickListener(new View.OnClickListener()
+        Button button1 = (Button)findViewById(R.id.Register);
+        button1.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
@@ -28,6 +28,17 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        Button button2 = (Button)findViewById(R.id.logIn);
+        button2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         TextView forgetPassword = (TextView)findViewById(R.id.resetPassword);
         forgetPassword.setOnClickListener(new View.OnClickListener(){
@@ -37,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
 
     }
 

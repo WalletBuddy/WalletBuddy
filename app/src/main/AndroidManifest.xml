@@ -28,6 +28,22 @@
             android:name=".ResetActivity"
             android:label="@string/title_activity_reset" >
         </activity>
+        <activity
+            android:name=".HomePage"
+            android:label="@string/title_activity_home_page" >
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".TransactionListActivity"
+            android:label="@string/title_activity_transaction_list" >
+        </activity>
+        <activity
+            android:name=".BudgetCategoryActivity"
+            android:label="@string/title_activity_budget_category" >
+        </activity>
     </application>
 
 </manifest>

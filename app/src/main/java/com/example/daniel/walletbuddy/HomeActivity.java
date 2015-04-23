@@ -7,37 +7,42 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
-public class RegisterActivity extends ActionBarActivity {
+public class HomeActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_home);
 
-        Button button1 = (Button)findViewById(R.id.Register);
-        button1.setOnClickListener(new View.OnClickListener()
-        {
+        TextView transactionList = (TextView)findViewById(R.id.RecentTransactions);
+        transactionList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent intent = new Intent(HomeActivity.this, TransactionListActivity.class);
                 startActivity(intent);
             }
         });
 
-
+        Button button1 = (Button)findViewById(R.id.PercentageButton);
+        button1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, BudgetCategoryActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_register, menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
-
-
     }
 
     @Override
