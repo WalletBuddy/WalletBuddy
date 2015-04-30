@@ -44,6 +44,10 @@
             android:name=".BudgetCategoryActivity"
             android:label="@string/title_activity_budget_category" >
         </activity>
+        <activity
+            android:name=".SetupActivity"
+            android:label="@string/title_activity_setup" >
+        </activity>
     </application>
 
 </manifest>

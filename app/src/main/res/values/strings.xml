@@ -10,4 +10,5 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_transaction_list">TransactionListActivity</string>
     <string name="title_activity_budget_category">BudgetCategoryActivity</string>
+    <string name="title_activity_setup">SetupActivity</string>
 </resources>

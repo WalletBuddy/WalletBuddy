@@ -53,8 +53,14 @@ public class HomeActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
+        }
+        else if(id == R.id.action_Setup)
+        {
+            Intent intent = new Intent(HomeActivity.this, SetupActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
