@@ -1,19 +1,62 @@
 package com.example.daniel.walletbuddy;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.os.Bundle;
 
 
 public class SetupActivity extends ActionBarActivity {
 
+    private ViewPager viewPager;
+    private PagerAdapter pagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        viewPager = (ViewPager)findViewById(R.id.viewPager);
+        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+
+        ActionBar.TabListener tabListener = new ActionBar.TabListener()
+        {
+
+            @Override
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+            }
+        };
+
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setText("Budget")
+                        .setTabListener(tabListener));
+
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setText("Category")
+                        .setTabListener(tabListener));
     }
 
 
@@ -37,5 +80,22 @@ public class SetupActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
+    {
+        public ScreenSlidePagerAdapter(FragmentManager fm)
+        {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
     }
 }

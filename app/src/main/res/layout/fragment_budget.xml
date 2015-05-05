@@ -9,9 +9,12 @@
     android:layout_height="match_parent">
     tools:context="com.example.daniel.walletbuddy.SetupActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:id="@+id/StartingBudget"
+        android:hint="Starting Budget"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
