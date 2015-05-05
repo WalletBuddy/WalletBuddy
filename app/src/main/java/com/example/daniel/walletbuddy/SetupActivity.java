@@ -1,5 +1,6 @@
 package com.example.daniel.walletbuddy;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,7 +14,7 @@ import android.view.MenuItem;
 import android.os.Bundle;
 
 
-public class SetupActivity extends ActionBarActivity {
+public class SetupActivity extends ActionBarActivity implements BudgetFragment.OnFragmentInteractionListener, CategoryFragment.OnFragmentInteractionListener{
 
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
@@ -22,13 +23,29 @@ public class SetupActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         viewPager = (ViewPager)findViewById(R.id.viewPager);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+            @Override
+            public void onPageScrolled(int i, float v, int i2) {
 
+            }
+
+            @Override
+            public void onPageSelected(int i)
+            {
+                actionBar.setSelectedNavigationItem(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
         ActionBar.TabListener tabListener = new ActionBar.TabListener()
         {
 
@@ -81,6 +98,12 @@ public class SetupActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
     {
         public ScreenSlidePagerAdapter(FragmentManager fm)
@@ -89,13 +112,21 @@ public class SetupActivity extends ActionBarActivity {
         }
 
         @Override
-        public Fragment getItem(int i) {
+        public Fragment getItem(int i)
+        {
+            switch(i)
+            {
+                case 0:
+                    return new BudgetFragment();
+                case 1:
+                    return new CategoryFragment();
+            }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 0;
+            return 2;
         }
     }
 }

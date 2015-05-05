@@ -9,12 +9,19 @@
     android:layout_height="match_parent">
     tools:context="com.example.daniel.walletbuddy.SetupActivity">
 
-    <!-- TODO: Update blank fragment layout -->
     <EditText
         android:id="@+id/StartingBudget"
         android:hint="Starting Budget"
+        android:inputType="number"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
+
+    <Button
+        android:id="@+id/saveBudgetButton"
+        android:text="Set Budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
