@@ -9,15 +9,24 @@ import android.widget.Button;
 import android.content.Intent;
 import android.widget.TextView;
 
-
+import com.parse.FindCallback;
+import com.parse.GetDataCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+import com.parse.ParseObject;
 
 
 public class MainActivity extends ActionBarActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Button button1 = (Button)findViewById(R.id.Register);
         button1.setOnClickListener(new View.OnClickListener()
