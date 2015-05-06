@@ -12,16 +12,34 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.os.Bundle;
+import android.widget.Button;
+import android.view.View;
+import android.widget.EditText;
+
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+import com.example.daniel.walletbuddy.data.BudgetData;
 
 
 public class SetupActivity extends ActionBarActivity implements BudgetFragment.OnFragmentInteractionListener, CategoryFragment.OnFragmentInteractionListener{
 
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+
+
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -74,7 +92,11 @@ public class SetupActivity extends ActionBarActivity implements BudgetFragment.O
                 actionBar.newTab()
                         .setText("Category")
                         .setTabListener(tabListener));
+
+
     }
+
+
 
 
     @Override

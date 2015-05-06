@@ -1,12 +1,36 @@
 package com.example.daniel.walletbuddy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
+import android.widget.Button;
+import android.widget.EditText;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+import android.widget.Button;
+import android.view.View;
+import android.widget.EditText;
+import com.parse.SaveCallback;
+import com.parse.GetCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import com.parse.ParseObject;
+import com.parse.FindCallback;
+import com.parse.ParseObject;
+
+
+import com.example.daniel.walletbuddy.data.BudgetData;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +40,7 @@ import android.support.v4.app.Fragment;
  * Use the {@link BudgetFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class BudgetFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +52,11 @@ public class BudgetFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
+    //boolean isUpdate;
+    EditText budgetNumber;
+    Button buttonBudget;
+    double budgetHolder;
+    BudgetData saveData = null;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -57,6 +86,9 @@ public class BudgetFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
@@ -64,9 +96,38 @@ public class BudgetFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_budget, container, false);
+        budgetNumber = (EditText)view.findViewById(R.id.initialBudget);
+        buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
+        buttonBudget.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                budgetHolder = Double.parseDouble(budgetNumber.getText().toString());
+                BudgetData d = new BudgetData();
+                if(saveData != null)
+                {
+                    d = saveData;
+                }
+                else
+                {
+                    d = new BudgetData();
+                }
+                d.setBudget(budgetHolder);
+                d.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+
+                    }
+                });
+            }
+
+
+        });
         return view;
         //return inflater.inflate(R.layout.fragment_budget, container, false);
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -91,6 +152,9 @@ public class BudgetFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this

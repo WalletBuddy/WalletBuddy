@@ -10,7 +10,7 @@
     tools:context="com.example.daniel.walletbuddy.SetupActivity">
 
     <EditText
-        android:id="@+id/StartingBudget"
+        android:id="@+id/initialBudget"
         android:hint="Starting Budget"
         android:inputType="number"
         android:layout_marginBottom="10dp"

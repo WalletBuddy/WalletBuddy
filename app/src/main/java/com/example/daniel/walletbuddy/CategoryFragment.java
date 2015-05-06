@@ -6,7 +6,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.support.v4.app.Fragment;
+import android.widget.EditText;
+
+import com.parse.GetCallback;
+import com.parse.Parse;
+import com.parse.ParseClassName;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+
+import android.widget.Button;
+import android.view.View;
+import android.widget.EditText;
+
+
+import com.example.daniel.walletbuddy.data.BudgetData;
+
+@ParseClassName("CategoryFragment")
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +38,8 @@ import android.support.v4.app.Fragment;
  * create an instance of this fragment.
  */
 public class CategoryFragment extends Fragment {
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,6 +50,11 @@ public class CategoryFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    boolean isUpdate;
+    EditText categoryName;
+    Button categoryButton;
+    BudgetData saveData;
 
     /**
      * Use this factory method to create a new instance of
@@ -57,6 +85,7 @@ public class CategoryFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -64,8 +93,33 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View viewGroup = (View)inflater.inflate(R.layout.fragment_category, container, false);
+        categoryName = (EditText) viewGroup.findViewById(R.id.setCategory);
+        categoryButton = (Button)viewGroup.findViewById(R.id.saveCategoryButton);
+        categoryButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                addCategoryObjectFromForm(v);
+            }
+        });
+
         return viewGroup;
         //return inflater.inflate(R.layout.fragment_category, container, false);
+    }
+
+    private void addCategoryObjectFromForm(View v)
+    {
+        EditText catName = (EditText)v.findViewById(R.id.setCategory);
+        String categorySave = catName.getText().toString();
+        BudgetData c = isUpdate ? saveData : new BudgetData();
+        c.setCategory(categorySave);
+
+        c.saveEventually(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
