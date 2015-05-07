@@ -53,9 +53,6 @@ public class BudgetFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     //boolean isUpdate;
-    EditText budgetNumber;
-    Button buttonBudget;
-    double budgetHolder;
     BudgetData saveData = null;
     /**
      * Use this factory method to create a new instance of
@@ -96,13 +93,12 @@ public class BudgetFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_budget, container, false);
-        budgetNumber = (EditText)view.findViewById(R.id.initialBudget);
-        buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
+        final EditText budgetNumber = (EditText)view.findViewById(R.id.initialBudget);
+        Button buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
         buttonBudget.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
-                budgetHolder = Double.parseDouble(budgetNumber.getText().toString());
+                double budgetHolder = Double.parseDouble(budgetNumber.getText().toString());
                 BudgetData d = new BudgetData();
                 if(saveData != null)
                 {
@@ -113,12 +109,8 @@ public class BudgetFragment extends Fragment {
                     d = new BudgetData();
                 }
                 d.setBudget(budgetHolder);
-                d.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
+                d.saveInBackground();
 
-                    }
-                });
             }
 
 

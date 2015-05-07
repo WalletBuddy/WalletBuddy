@@ -1,13 +1,13 @@
 package com.example.daniel.walletbuddy;
 
 import android.app.Application;
+import com.parse.Parse;
+import com.parse.ParseObject;
+import android.util.Log;
 
 
 import com.example.daniel.walletbuddy.data.BudgetData;
 
-import com.example.daniel.walletbuddy.CategoryFragment;
-import com.parse.Parse;
-import com.parse.ParseObject;
 
 public class ParseApplication extends Application
 {
@@ -22,6 +22,7 @@ public class ParseApplication extends Application
         Parse.initialize(this, "DJN9Tzz3LznkbVUdAXD1pUnryOsg1kdrQTNDK76k", "SIYhQthxm7GRPQontuXJPTPmdiar7LrQ9qu0Y9li");
 
         ParseObject.registerSubclass(BudgetData.class);
+        Log.i("Application", "Initialized!");
     }
 }
 

@@ -1,12 +1,16 @@
 package com.example.daniel.walletbuddy.data;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseFile;
+
 
 @ParseClassName("BudgetData")
 
 public class BudgetData extends ParseObject
 {
+    public BudgetData()
+    {
+
+    }
 
     public String getCategory()
     {
@@ -30,11 +34,11 @@ public class BudgetData extends ParseObject
 
     public double getBudget()
     {
-        return getDouble("Starting Budget");
+        return getDouble("Budget");
     }
 
     public void setBudget(double startingBudget)
     {
-        put("Starting Budget", startingBudget);
+        put("Budget", startingBudget);
     }
 }
