@@ -9,13 +9,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.daniel.walletbuddy.data.BudgetData;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+
+import java.util.List;
 
 public class HomeActivity extends ActionBarActivity {
+
+    BudgetData saveData;
+    boolean isUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+        final TextView initBudget = (TextView)findViewById(R.id.StartingBudget);
 
         TextView transactionList = (TextView)findViewById(R.id.RecentTransactions);
         transactionList.setOnClickListener(new View.OnClickListener(){

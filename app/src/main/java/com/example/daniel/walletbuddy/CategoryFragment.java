@@ -51,10 +51,9 @@ public class CategoryFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    boolean isUpdate;
-    EditText categoryName;
-    Button categoryButton;
-    BudgetData saveData;
+    //boolean isUpdate;
+
+    BudgetData saveData = null;
 
     /**
      * Use this factory method to create a new instance of
@@ -92,35 +91,31 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View viewGroup = (View)inflater.inflate(R.layout.fragment_category, container, false);
-        categoryName = (EditText) viewGroup.findViewById(R.id.setCategory);
-        categoryButton = (Button)viewGroup.findViewById(R.id.saveCategoryButton);
-        categoryButton.setOnClickListener(new View.OnClickListener(){
-
+        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_category, container, false);
+        final EditText categoryName = (EditText)view.findViewById(R.id.setCategory);
+        Button buttonCategory = (Button)view.findViewById(R.id.saveCategoryButton);
+        buttonCategory.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                addCategoryObjectFromForm(v);
+                String categorySave = categoryName.getText().toString();
+                BudgetData d = new BudgetData();
+                if(saveData != null)
+                {
+                    d = saveData;
+                }
+                else
+                {
+                    d = new BudgetData();
+                }
+                d.setCategory(categorySave);
+                d.saveInBackground();
             }
         });
 
-        return viewGroup;
+        return view;
         //return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
-    private void addCategoryObjectFromForm(View v)
-    {
-        EditText catName = (EditText)v.findViewById(R.id.setCategory);
-        String categorySave = catName.getText().toString();
-        BudgetData c = isUpdate ? saveData : new BudgetData();
-        c.setCategory(categorySave);
-
-        c.saveEventually(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-
-            }
-        });
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
