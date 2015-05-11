@@ -1,4 +1,4 @@
-package com.example.daniel.walletbuddy;
+package com.dalin.my.walletbuddy;
 
 import android.app.Application;
 import com.parse.Parse;
@@ -6,7 +6,7 @@ import com.parse.ParseObject;
 import android.util.Log;
 
 
-import com.example.daniel.walletbuddy.data.BudgetData;
+import com.dalin.my.walletbuddy.data.BudgetData;
 
 
 public class ParseApplication extends Application

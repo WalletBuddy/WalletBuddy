@@ -1,4 +1,4 @@
-package com.example.daniel.walletbuddy;
+package com.dalin.my.walletbuddy;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

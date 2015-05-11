@@ -1,4 +1,4 @@
-package com.example.daniel.walletbuddy;
+package com.dalin.my.walletbuddy;
 
 import android.app.Activity;
 import android.net.Uri;

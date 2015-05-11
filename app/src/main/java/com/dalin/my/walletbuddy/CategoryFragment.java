@@ -1,47 +1,34 @@
-package com.example.daniel.walletbuddy;
+package com.dalin.my.walletbuddy;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.support.v4.app.Fragment;
-import android.widget.Button;
 import android.widget.EditText;
-import android.view.View;
-import android.view.ViewGroup;
+
+import com.parse.ParseClassName;
 
 
-import android.widget.Button;
-import android.view.View;
-import android.widget.EditText;
-import com.parse.SaveCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
+import com.dalin.my.walletbuddy.data.BudgetData;
 
-import com.parse.ParseObject;
-import com.parse.FindCallback;
-import com.parse.ParseObject;
-
-
-import com.example.daniel.walletbuddy.data.BudgetData;
+@ParseClassName("CategoryFragment")
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BudgetFragment.OnFragmentInteractionListener} interface
+ * {@link CategoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BudgetFragment#newInstance} factory method to
+ * Use the {@link CategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+public class CategoryFragment extends Fragment {
 
-public class BudgetFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -52,19 +39,22 @@ public class BudgetFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
     //boolean isUpdate;
+
     BudgetData saveData = null;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BudgetFragment.
+     * @return A new instance of fragment CategoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BudgetFragment newInstance(String param1, String param2) {
-        BudgetFragment fragment = new BudgetFragment();
+    public static CategoryFragment newInstance(String param1, String param2) {
+        CategoryFragment fragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,7 +62,7 @@ public class BudgetFragment extends Fragment {
         return fragment;
     }
 
-    public BudgetFragment() {
+    public CategoryFragment() {
         // Required empty public constructor
     }
 
@@ -84,21 +74,19 @@ public class BudgetFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_budget, container, false);
-        final EditText budgetNumber = (EditText)view.findViewById(R.id.initialBudget);
-        Button buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
-        buttonBudget.setOnClickListener(new View.OnClickListener(){
+        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_category, container, false);
+        final EditText categoryName = (EditText)view.findViewById(R.id.setCategory);
+        Button buttonCategory = (Button)view.findViewById(R.id.saveCategoryButton);
+        buttonCategory.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                double budgetHolder = Double.parseDouble(budgetNumber.getText().toString());
+                String categorySave = categoryName.getText().toString();
                 BudgetData d = new BudgetData();
                 if(saveData != null)
                 {
@@ -108,17 +96,14 @@ public class BudgetFragment extends Fragment {
                 {
                     d = new BudgetData();
                 }
-                d.setBudget(budgetHolder);
+                d.setCategory(categorySave);
                 d.saveInBackground();
-
             }
-
-
         });
-        return view;
-        //return inflater.inflate(R.layout.fragment_budget, container, false);
-    }
 
+        return view;
+        //return inflater.inflate(R.layout.fragment_category, container, false);
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -144,9 +129,6 @@ public class BudgetFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-
-
 
     /**
      * This interface must be implemented by activities that contain this

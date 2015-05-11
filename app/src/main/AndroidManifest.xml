@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.daniel.walletbuddy" >
+    package="com.dalin.my.walletbuddy" >
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,12 +8,12 @@
 
     <application
         android:allowBackup="true"
-        android:name=".ParseApplication"
+        android:name="com.dalin.my.walletbuddy.ParseApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.dalin.my.walletbuddy.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,36 +22,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_activity_register" >
+            android:name="com.dalin.my.walletbuddy.RegisterActivity"
+            android:label="WalletBuddy" >
         </activity>
         <activity
             android:name=".logInActivity"
-            android:label="@string/title_activity_log_in" >
+            android:label="WalletBuddy" >
         </activity>
         <activity
-            android:name=".ResetActivity"
-            android:label="@string/title_activity_reset" >
+            android:name="com.dalin.my.walletbuddy.ResetActivity"
+            android:label="WalletBuddy" >
         </activity>
         <activity
             android:name=".HomePage"
-            android:label="@string/title_activity_home_page" >
+            android:label="WalletBuddy" >
         </activity>
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home" >
+            android:name="com.dalin.my.walletbuddy.HomeActivity"
+            android:label="WalletBuddy" >
         </activity>
         <activity
-            android:name=".TransactionListActivity"
-            android:label="@string/title_activity_transaction_list" >
+            android:name="com.dalin.my.walletbuddy.TransactionListActivity"
+            android:label="WalletBuddy" >
         </activity>
         <activity
-            android:name=".BudgetCategoryActivity"
-            android:label="@string/title_activity_budget_category" >
+            android:name="com.dalin.my.walletbuddy.BudgetCategoryActivity"
+            android:label="WalletBuddy" >
         </activity>
         <activity
-            android:name=".SetupActivity"
-            android:label="@string/title_activity_setup" >
+            android:name="com.dalin.my.walletbuddy.SetupActivity"
+            android:label="WalletBuddy" >
         </activity>
 
     </application>

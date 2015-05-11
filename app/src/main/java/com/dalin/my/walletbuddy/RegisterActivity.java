@@ -1,28 +1,43 @@
-package com.example.daniel.walletbuddy;
+package com.dalin.my.walletbuddy;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
-import android.widget.TextView;
 import android.view.View;
+import android.widget.Button;
 
-public class TransactionListActivity extends ActionBarActivity {
+
+public class RegisterActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_list);
+        setContentView(R.layout.activity_register);
+
+        Button button1 = (Button)findViewById(R.id.Register);
+        button1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
+
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_transaction_list, menu);
+        getMenuInflater().inflate(R.menu.menu_register, menu);
         return true;
+
+
     }
 
     @Override
