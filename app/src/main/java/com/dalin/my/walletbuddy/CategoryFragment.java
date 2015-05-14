@@ -15,7 +15,7 @@ import com.parse.ParseClassName;
 
 import com.dalin.my.walletbuddy.data.BudgetData;
 
-@ParseClassName("CategoryFragment")
+import com.dalin.my.walletbuddy.data.CategoryData;
 
 
 /**
@@ -42,7 +42,7 @@ public class CategoryFragment extends Fragment {
 
     //boolean isUpdate;
 
-    BudgetData saveData = null;
+    CategoryData saveData = null;
 
     /**
      * Use this factory method to create a new instance of
@@ -87,14 +87,14 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String categorySave = categoryName.getText().toString();
-                BudgetData d = new BudgetData();
+                CategoryData d = new CategoryData();
                 if(saveData != null)
                 {
                     d = saveData;
                 }
                 else
                 {
-                    d = new BudgetData();
+                    d = new CategoryData();
                 }
                 d.setCategory(categorySave);
                 d.saveInBackground();

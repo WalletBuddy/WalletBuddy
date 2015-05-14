@@ -13,11 +13,14 @@ import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import com.dalin.my.walletbuddy.data.BudgetData;
+
+import java.util.List;
 
 public class HomeActivity extends ActionBarActivity {
 
@@ -48,6 +51,31 @@ public class HomeActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, BudgetCategoryActivity.class);
                 startActivity(intent);
+            }
+        });
+
+
+
+
+        ParseQuery<BudgetData> query = ParseQuery.getQuery(BudgetData.class);
+        query.findInBackground(new FindCallback<BudgetData>() {
+            @Override
+            public void done(List<BudgetData> budgetData, ParseException e) {
+                if(e == null)
+                {
+                    if(budgetData.size() > 0) {
+                        saveData = budgetData.get(0);
+                        TextView startBudget = (TextView) findViewById(R.id.StartingBudget);
+                        String budgetHolder = Double.toString(saveData.getBudget());
+                        startBudget.setText(budgetHolder);
+                    }
+
+                }
+                else
+                {
+                    //Do nothing
+                }
+
             }
         });
 

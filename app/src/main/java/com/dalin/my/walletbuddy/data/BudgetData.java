@@ -12,26 +12,6 @@ public class BudgetData extends ParseObject
 
     }
 
-    public String getCategory()
-    {
-        return getString("category");
-    }
-
-    public void setCategory(String category)
-    {
-        put("category", category);
-    }
-
-    public double getCost()
-    {
-        return getDouble("expenses");
-    }
-
-    public void setCost(double expenses)
-    {
-        put("expenses", expenses);
-    }
-
     public double getBudget()
     {
         return getDouble("Budget");
@@ -40,5 +20,14 @@ public class BudgetData extends ParseObject
     public void setBudget(double startingBudget)
     {
         put("Budget", startingBudget);
+    }
+
+    public double getRemaining()
+    {
+        return getDouble("Remaining");
+    }
+    public void setRemaining(double remainingBudget)
+    {
+        put("Remaining", remainingBudget);
     }
 }

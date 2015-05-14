@@ -9,9 +9,19 @@ import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.widget.EditText;
+import android.content.DialogInterface;
+import android.widget.TextView;
 
 
 import com.dalin.my.walletbuddy.data.BudgetData;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 
 /**
@@ -34,8 +44,12 @@ public class BudgetFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    //boolean isUpdate;
+
+
+
+    boolean isUpdate;
     BudgetData saveData = null;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -67,7 +81,6 @@ public class BudgetFragment extends Fragment {
         }
 
 
-
     }
 
     @Override
@@ -76,25 +89,65 @@ public class BudgetFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_budget, container, false);
         final EditText budgetNumber = (EditText)view.findViewById(R.id.initialBudget);
-        Button buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
-        buttonBudget.setOnClickListener(new View.OnClickListener(){
+
+        //Query ParseObject first to check if data is already saved. This part only makes it so that we have a reference to the saved data if available
+        ParseQuery<BudgetData> query = ParseQuery.getQuery(BudgetData.class);
+        query.findInBackground(new FindCallback<BudgetData>() {
             @Override
-            public void onClick(View v) {
-                double budgetHolder = Double.parseDouble(budgetNumber.getText().toString());
-                BudgetData d = new BudgetData();
-                if(saveData != null)
+            public void done(List<BudgetData> budgetData, ParseException e) {
+                if(e == null)
                 {
-                    d = saveData;
+                    if(budgetData.size() > 0)
+                    {
+                        saveData = budgetData.get(0);
+                    }
                 }
                 else
                 {
-                    d = new BudgetData();
+                    //Do nothing
                 }
-                d.setBudget(budgetHolder);
-                d.saveInBackground();
 
             }
+        });
 
+        Button buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
+        buttonBudget.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                double budgetHolder = Double.parseDouble(budgetNumber.getText().toString());
+                BudgetData newData = new BudgetData();
+                //if there is data saved already, set new object to reference that save data otherwise new object
+                if(saveData != null)
+                {
+                    newData = saveData;
+                }
+                else
+                {
+                    newData = new BudgetData();
+                }
+                newData.setBudget(budgetHolder);
+                newData.saveInBackground();
+                //This part is needed for the first initial setup. Weird solution but it works!
+                ParseQuery<BudgetData> query = ParseQuery.getQuery(BudgetData.class);
+                query.findInBackground(new FindCallback<BudgetData>() {
+                    @Override
+                    public void done(List<BudgetData> budgetData, ParseException e) {
+                        if(e == null)
+                        {
+                            if(budgetData.size() > 0)
+                            {
+                                saveData = budgetData.get(0);
+                            }
+                        }
+                        else
+                        {
+                            //Do nothing
+                        }
+
+                    }
+                });
+            }
 
         });
         return view;
