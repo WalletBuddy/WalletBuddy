@@ -5,21 +5,26 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.widget.TextView;
 
 
 import com.dalin.my.walletbuddy.data.BudgetData;
+import com.dalin.my.walletbuddy.adapter.BudgetDataAdapter;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.ParseACL;
 
 import java.util.List;
 
@@ -46,9 +51,9 @@ public class BudgetFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
 
-
+    private BudgetDataAdapter budgetAdapter;
     boolean isUpdate;
-    BudgetData saveData = null;
+    BudgetData saveData;
 
     /**
      * Use this factory method to create a new instance of
@@ -88,65 +93,45 @@ public class BudgetFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_budget, container, false);
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
         final EditText budgetNumber = (EditText)view.findViewById(R.id.initialBudget);
 
-        //Query ParseObject first to check if data is already saved. This part only makes it so that we have a reference to the saved data if available
-        ParseQuery<BudgetData> query = ParseQuery.getQuery(BudgetData.class);
-        query.findInBackground(new FindCallback<BudgetData>() {
-            @Override
-            public void done(List<BudgetData> budgetData, ParseException e) {
-                if(e == null)
-                {
-                    if(budgetData.size() > 0)
-                    {
-                        saveData = budgetData.get(0);
-                    }
-                }
-                else
-                {
-                    //Do nothing
-                }
 
-            }
-        });
+
+        final BudgetData data = new BudgetData();
+        data.setACL(new ParseACL(ParseUser.getCurrentUser()));
+        data.setUser(ParseUser.getCurrentUser());
+
 
         Button buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
         buttonBudget.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                final double budgetTemp = Double.parseDouble(budgetNumber.getText().toString());
+                String key = ParseUser.getCurrentUser().getObjectId();
 
-                double budgetHolder = Double.parseDouble(budgetNumber.getText().toString());
-                BudgetData newData = new BudgetData();
-                //if there is data saved already, set new object to reference that save data otherwise new object
-                if(saveData != null)
-                {
-                    newData = saveData;
-                }
-                else
-                {
-                    newData = new BudgetData();
-                }
-                newData.setBudget(budgetHolder);
-                newData.saveInBackground();
-                //This part is needed for the first initial setup. Weird solution but it works!
                 ParseQuery<BudgetData> query = ParseQuery.getQuery(BudgetData.class);
-                query.findInBackground(new FindCallback<BudgetData>() {
+                query.whereEqualTo("user", ParseUser.getCurrentUser());
+                query.getFirstInBackground(new GetCallback<BudgetData>() {
                     @Override
-                    public void done(List<BudgetData> budgetData, ParseException e) {
-                        if(e == null)
-                        {
-                            if(budgetData.size() > 0)
-                            {
-                                saveData = budgetData.get(0);
-                            }
-                        }
-                        else
-                        {
-                            //Do nothing
-                        }
+                    public void done(BudgetData budgetData, ParseException e) {
+                        //user logins with budget setup
+                        if (budgetData != null) {
+                            budgetData.setBudget(budgetTemp);
+                            budgetData.saveInBackground();
+                        //user logins with no budget setup
+                        } else if (budgetData == null) {
 
+                            BudgetData data = new BudgetData();
+                            data.setACL(new ParseACL(ParseUser.getCurrentUser()));
+                            data.setUser(ParseUser.getCurrentUser());
+                            data.setBudget(budgetTemp);
+                            data.saveInBackground();
+                        }
                     }
                 });
+
             }
 
         });

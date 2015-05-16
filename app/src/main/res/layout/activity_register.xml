@@ -20,35 +20,28 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/userEmail"
+        android:id="@+id/registerEmail"
         android:hint="Email"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
     <EditText
-        android:id="@+id/userPassword"
+        android:id="@+id/registerName"
+        android:hint="Username"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/registerPassword"
         android:hint="Password"
         android:inputType="textPassword"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/birthYear"
-        android:hint="Birth Year"
-        android:inputType="number"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/zipCode"
-        android:hint="Zip Code"
-        android:inputType="number"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/Register"

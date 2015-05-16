@@ -1,6 +1,7 @@
 package com.dalin.my.walletbuddy.data;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 
 @ParseClassName("BudgetData")
@@ -29,5 +30,15 @@ public class BudgetData extends ParseObject
     public void setRemaining(double remainingBudget)
     {
         put("Remaining", remainingBudget);
+    }
+
+    public void setUser(ParseUser currentUser)
+    {
+        put("user", currentUser);
+    }
+
+    public String getUser()
+    {
+        return getString("user");
     }
 }

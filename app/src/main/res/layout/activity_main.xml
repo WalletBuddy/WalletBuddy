@@ -19,8 +19,8 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/userEmail"
-        android:hint="Email"
+        android:id="@+id/userName"
+        android:hint="Username"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
