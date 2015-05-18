@@ -27,4 +27,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
 
     compile 'com.jakewharton:butterknife:6.1.0'
+
+    compile 'com.android.support:cardview-v7:21.0.+'
+    compile 'com.android.support:recyclerview-v7:21.0.+'
 }

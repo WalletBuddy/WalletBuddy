@@ -10,11 +10,15 @@ import android.widget.Button;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
 
-import com.parse.ParseClassName;
 
-
-import com.dalin.my.walletbuddy.data.BudgetData;
-
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.ParseACL;
 import com.dalin.my.walletbuddy.data.CategoryData;
 
 
@@ -81,23 +85,18 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_category, container, false);
+
         final EditText categoryName = (EditText)view.findViewById(R.id.setCategory);
         Button buttonCategory = (Button)view.findViewById(R.id.saveCategoryButton);
         buttonCategory.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String categorySave = categoryName.getText().toString();
-                CategoryData d = new CategoryData();
-                if(saveData != null)
-                {
-                    d = saveData;
-                }
-                else
-                {
-                    d = new CategoryData();
-                }
-                d.setCategory(categorySave);
-                d.saveInBackground();
+                final String categorySave = categoryName.getText().toString();
+                CategoryData data = new CategoryData();
+                data.setACL(new ParseACL(ParseUser.getCurrentUser()));
+                data.setUser(ParseUser.getCurrentUser());
+                data.setCategory(categorySave);
+                data.saveInBackground();
             }
         });
 

@@ -54,7 +54,7 @@ public class HomeActivity extends ActionBarActivity {
             }
         });
 
-
+        //
 
 
         ParseQuery<BudgetData> query = ParseQuery.getQuery(BudgetData.class);
@@ -78,6 +78,8 @@ public class HomeActivity extends ActionBarActivity {
 
             }
         });
+
+        //
 
     }
 

@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.dalin.my.walletbuddy.data.BudgetData;
 import com.dalin.my.walletbuddy.data.CategoryData;
+import com.dalin.my.walletbuddy.data.CategoryExpenses;
 
 public class ParseApplication extends Application
 {
@@ -23,7 +24,7 @@ public class ParseApplication extends Application
 
         ParseObject.registerSubclass(BudgetData.class);
         ParseObject.registerSubclass(CategoryData.class);
-
+        ParseObject.registerSubclass(CategoryExpenses.class);
 
 
         Log.i("Application", "Initialized!");

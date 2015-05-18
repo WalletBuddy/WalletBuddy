@@ -1,18 +1,16 @@
 package com.dalin.my.walletbuddy.data;
-
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-
-@ParseClassName("CategoryData")
-
-public class CategoryData extends ParseObject
+@ParseClassName("CategoryExpenses")
+public class CategoryExpenses extends ParseObject
 {
-    public CategoryData()
+    public CategoryExpenses()
     {
 
     }
+
     public String getCategory()
     {
         return getString("Category");
@@ -23,6 +21,25 @@ public class CategoryData extends ParseObject
         put("Category", category);
     }
 
+    public String getPlace()
+    {
+        return getString("Name");
+    }
+
+    public void setPlace(String name)
+    {
+        put("Name", name);
+    }
+
+    public double getCost()
+    {
+        return getDouble("Cost");
+    }
+
+    public void setCost(Double cost)
+    {
+        put("Cost", cost);
+    }
 
     public void setUser(ParseUser currentUser)
     {
@@ -33,4 +50,8 @@ public class CategoryData extends ParseObject
     {
         return getString("user");
     }
+
+
+
 }
+

@@ -8,86 +8,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    
-        <TextView
-            android:id="@+id/breakdownHeader"
-            android:text="Budget Breakdown"
-            android:textSize="24sp"
-            android:layout_marginBottom="25dp"
-            android:layout_gravity="center"           
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/cv"
+        >
 
-        <TextView
-            android:id="@+id/StartingBudget"
-            android:text="Starting Budget: $200"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
 
-        <TextView
-            android:id="@+id/amountLeft"
-            android:text="Amount left: $500"
-            android:textSize="18sp"
-            android:layout_marginBottom="30dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        
-        
-    </LinearLayout>
-
-        <TextView
-            android:text="Categories"
-            android:textSize = "30sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="Percentage Used"
-            android:layout_alignParentLeft="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="Category Name"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="Add expenses"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/person_name"
+                android:text="@string/hello_blank_fragment"
+                android:layout_alignParentTop="true"
+                android:textSize="30sp"
+                />
 
 
-    </RelativeLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    </android.support.v7.widget.CardView>
 
-        <ListView
-            android:id="@+id/android:list"
-            android:divider="#FFCC00"
-            android:dividerHeight="4px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
-    </LinearLayout>
-    
+
 </LinearLayout>

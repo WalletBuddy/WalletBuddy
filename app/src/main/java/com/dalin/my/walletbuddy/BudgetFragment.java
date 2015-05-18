@@ -93,16 +93,7 @@ public class BudgetFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_budget, container, false);
-        ParseUser currentUser = ParseUser.getCurrentUser();
-
         final EditText budgetNumber = (EditText)view.findViewById(R.id.initialBudget);
-
-
-
-        final BudgetData data = new BudgetData();
-        data.setACL(new ParseACL(ParseUser.getCurrentUser()));
-        data.setUser(ParseUser.getCurrentUser());
-
 
         Button buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
         buttonBudget.setOnClickListener(new View.OnClickListener(){
