@@ -92,6 +92,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final String categorySave = categoryName.getText().toString();
+
                 CategoryData data = new CategoryData();
                 data.setACL(new ParseACL(ParseUser.getCurrentUser()));
                 data.setUser(ParseUser.getCurrentUser());
