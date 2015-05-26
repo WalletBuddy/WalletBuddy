@@ -100,7 +100,6 @@ public class CategoryFragment extends Fragment {
                 data.saveInBackground();
             }
         });
-
         return view;
         //return inflater.inflate(R.layout.fragment_category, container, false);
     }

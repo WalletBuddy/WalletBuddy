@@ -4,14 +4,67 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.content.Intent;
+
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.TextView;
+
+import com.dalin.my.walletbuddy.data.BudgetData;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.dalin.my.walletbuddy.data.CategoryData;
+import com.dalin.my.walletbuddy.adapter.CategoryAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+
+
 
 
 public class BudgetCategoryActivity extends ActionBarActivity {
+
+    private CategoryAdapter adapter;
+    private RecyclerView recList;
+    private TextView titleCategory;
+    private TextView addTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_category);
+
+        recList = (RecyclerView)findViewById(R.id.cardList);
+        recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
+
+
+        ParseQuery<CategoryData> query = ParseQuery.getQuery(CategoryData.class);
+        query.findInBackground(new FindCallback<CategoryData>() {
+            @Override
+            public void done(List<CategoryData> categoryDatas, ParseException e) {
+                List<CategoryData> array = new ArrayList<CategoryData>(categoryDatas);
+                adapter = new CategoryAdapter(array);
+                recList.setAdapter(adapter);
+
+
+
+
+            }
+        });
+
+
+
+
+
     }
 
 

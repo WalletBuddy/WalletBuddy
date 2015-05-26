@@ -8,18 +8,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/setCategory"
-        android:hint="Enter a Category"
-        android:inputType="text"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/CategoryName"
+        android:text="Category"
+        android:textSize="24dp"
         android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
+
+    <EditText
+        android:id="@+id/MerchantName"
+        android:hint="Merchant"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/totalCost"
+        android:hint="Total Cost"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
     <Button
-        android:id="@+id/saveCategoryButton"
-        android:text="Save Category"
+        android:id="@+id/saveTransaction"
+        android:text="Save Transaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
+

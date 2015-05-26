@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/categoryTitle"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@android:color/holo_blue_light"
@@ -31,7 +31,7 @@
             android:paddingTop="16dp"
             android:paddingLeft="10dp"
             android:paddingBottom="16dp"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/categoryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -41,7 +41,7 @@
             android:textSize="18dp"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/categoryTitle"
             android:layout_alignParentRight="true"
             android:paddingRight="10dp"
             android:layout_width="wrap_content"
