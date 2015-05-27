@@ -11,7 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dalin.my.walletbuddy.adapter.CategoryExpensesAdapter;
 import com.dalin.my.walletbuddy.data.BudgetData;
+import com.dalin.my.walletbuddy.data.CategoryExpenses;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -34,6 +36,7 @@ public class BudgetCategoryActivity extends ActionBarActivity {
     private RecyclerView recList;
     private TextView titleCategory;
     private TextView addTransaction;
+    private CategoryExpensesAdapter adapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,16 @@ public class BudgetCategoryActivity extends ActionBarActivity {
 
 
 
+            }
+        });
+
+        ParseQuery<CategoryExpenses> query2 = ParseQuery.getQuery(CategoryExpenses.class);
+        query2.findInBackground(new FindCallback<CategoryExpenses>() {
+            @Override
+            public void done(List<CategoryExpenses> categoryExpenseses, ParseException e) {
+                List<CategoryExpenses> array2 = new ArrayList<CategoryExpenses>(categoryExpenseses);
+                adapter2 = new CategoryExpensesAdapter(array2);
+                recList.setAdapter(adapter2);
             }
         });
 
