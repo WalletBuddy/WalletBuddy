@@ -36,12 +36,19 @@ public class BudgetCategoryActivity extends ActionBarActivity {
     private RecyclerView recList;
     private TextView titleCategory;
     private TextView addTransaction;
-    private CategoryExpensesAdapter adapter2;
+    //private CategoryExpensesAdapter adapter2;
+
+    private List<CategoryData> array;
+    private List<CategoryExpenses> array2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_category);
+
+
+
+
 
         recList = (RecyclerView)findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
@@ -50,27 +57,40 @@ public class BudgetCategoryActivity extends ActionBarActivity {
         recList.setLayoutManager(llm);
 
 
+
+
         ParseQuery<CategoryData> query = ParseQuery.getQuery(CategoryData.class);
         query.findInBackground(new FindCallback<CategoryData>() {
             @Override
             public void done(List<CategoryData> categoryDatas, ParseException e) {
-                List<CategoryData> array = new ArrayList<CategoryData>(categoryDatas);
+                array = new ArrayList<CategoryData>(categoryDatas);
                 adapter = new CategoryAdapter(array);
                 recList.setAdapter(adapter);
-
-
-
-
             }
         });
+
+         /**
+
+        ParseQuery<CategoryExpenses> query = ParseQuery.getQuery(CategoryExpenses.class);
+        query.findInBackground(new FindCallback<CategoryExpenses>() {
+            @Override
+            public void done(List<CategoryExpenses> categoryExpensesList, ParseException e) {
+                array2 = new ArrayList<CategoryExpenses>(categoryExpensesList);
+                adapter = new CategoryAdapter(categoryExpensesList);
+                recList.setAdapter(adapter);
+            }
+        });
+        **/
+
+        /**
 
         ParseQuery<CategoryExpenses> query2 = ParseQuery.getQuery(CategoryExpenses.class);
         query2.findInBackground(new FindCallback<CategoryExpenses>() {
             @Override
             public void done(List<CategoryExpenses> categoryExpenseses, ParseException e) {
-                List<CategoryExpenses> array2 = new ArrayList<CategoryExpenses>(categoryExpenseses);
-                adapter2 = new CategoryExpensesAdapter(array2);
-                recList.setAdapter(adapter2);
+                array2 = new ArrayList<CategoryExpenses>(categoryExpenseses);
+                //adapter2 = new CategoryExpensesAdapter(array2);
+                //recList.setAdapter(adapter2);
             }
         });
 
@@ -78,6 +98,9 @@ public class BudgetCategoryActivity extends ActionBarActivity {
 
 
 
+        adapter = new CategoryAdapter(array, array2);
+        recList.setAdapter(adapter);
+        **/
     }
 
 

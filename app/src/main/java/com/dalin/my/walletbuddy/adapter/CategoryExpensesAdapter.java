@@ -14,6 +14,7 @@ import com.dalin.my.walletbuddy.R;
 public class CategoryExpensesAdapter extends RecyclerView.Adapter<CategoryExpensesAdapter.CategoryExpensesViewHolder>
 {
     private List<CategoryExpenses> expensesList;
+    private double totalCost = 0;
 
     public CategoryExpensesAdapter(List<CategoryExpenses> expensesList)
     {
@@ -32,7 +33,16 @@ public class CategoryExpensesAdapter extends RecyclerView.Adapter<CategoryExpens
     public void onBindViewHolder(CategoryExpensesViewHolder categoryExpensesViewHolder, int i)
     {
         String holder = categoryExpensesViewHolder.vCategoryTitle.getText().toString();
+        for(int j = 0; j < expensesList.size(); j++)
+        {
+            if(expensesList.get(j).getCategory().equals(holder))
+            {
+                Double costHolder = expensesList.get(j).getCost();
+                totalCost += costHolder;
 
+            }
+        }
+        categoryExpensesViewHolder.vTotalExpenses.setText(Double.toString(totalCost));
 
     }
 

@@ -12,12 +12,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.dalin.my.walletbuddy.data.CategoryData;
 import com.dalin.my.walletbuddy.data.CategoryExpenses;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.ParseACL;
+
 
 
 
@@ -31,6 +37,11 @@ public class TransactionAddition extends ActionBarActivity
     private Button transactionSave;
 
 
+    private double costHolder = 0;
+    private int transactionHolder;
+    private double trueCost;
+    private int trueTransaction;
+    double saveHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,6 +66,7 @@ public class TransactionAddition extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
+                transactionHolder = 0;
                 CategoryExpenses data = new CategoryExpenses();
                 data.setACL(new ParseACL(ParseUser.getCurrentUser()));
                 data.setUser(ParseUser.getCurrentUser());
@@ -62,8 +74,31 @@ public class TransactionAddition extends ActionBarActivity
                 data.setCost(Double.parseDouble(transactionCost.getText().toString()));
                 data.setPlace(merchantName.getText().toString());
                 data.saveInBackground();
+
+                saveHolder = Double.parseDouble(transactionCost.getText().toString());
+                transactionHolder++;
+                costHolder = saveHolder;
+                Log.i("Double", Double.toString(costHolder));
+                ParseQuery<CategoryData> query = ParseQuery.getQuery(CategoryData.class);
+                query.whereEqualTo("Category", categoryName.getText().toString());
+                query.getFirstInBackground(new GetCallback<CategoryData>() {
+                    @Override
+                    public void done(CategoryData categoryData, ParseException e) {
+                        categoryData.setACL(new ParseACL(ParseUser.getCurrentUser()));
+                        categoryData.setUser(ParseUser.getCurrentUser());
+                        trueCost = categoryData.getTotalCost();
+                        trueCost += costHolder;
+                        categoryData.setTotalCost(trueCost);
+                        trueTransaction = categoryData.getTotalTransactions();
+                        trueTransaction += transactionHolder;
+                        categoryData.setTotalTransactions(trueTransaction);
+                        categoryData.saveInBackground();
+
+                    }
+                });
             }
         });
+
 
 
 

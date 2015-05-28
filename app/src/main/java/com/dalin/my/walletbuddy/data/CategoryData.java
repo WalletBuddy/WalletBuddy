@@ -33,4 +33,23 @@ public class CategoryData extends ParseObject
     {
         return getString("user");
     }
+
+    public double getTotalCost()
+    {
+        return getDouble("Total");
+    }
+    public void setTotalCost(double cost)
+    {
+        put("Total", cost);
+    }
+
+    public int getTotalTransactions()
+    {
+        return getInt("Transactions");
+    }
+
+    public void setTotalTransactions(int number)
+    {
+        put("Transactions", number);
+    }
 }

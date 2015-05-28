@@ -97,6 +97,8 @@ public class CategoryFragment extends Fragment {
                 data.setACL(new ParseACL(ParseUser.getCurrentUser()));
                 data.setUser(ParseUser.getCurrentUser());
                 data.setCategory(categorySave);
+                data.setTotalCost(0);
+                data.setTotalTransactions(0);
                 data.saveInBackground();
             }
         });
