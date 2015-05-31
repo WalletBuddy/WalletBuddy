@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.List;
 
+import com.dalin.my.walletbuddy.TransactionListActivity;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -89,7 +90,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public class CategoryViewHolder extends RecyclerView.ViewHolder
     {
         protected TextView vCategoryTitle;
         protected TextView addTransaction;
@@ -104,15 +105,23 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             vTotalTransactions = (TextView)v.findViewById(R.id.totalTransactions);
             addTransaction = (TextView)v.findViewById(R.id.addDirectlyToCategory);
 
-            addTransaction.setOnClickListener(this);
-        }
+            addTransaction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), TransactionAddition.class);
+                    intent.putExtra("key", vCategoryTitle.getText().toString());
+                    v.getContext().startActivity(intent);
+                }
+            });
 
-        @Override
-        public void onClick(View v)
-        {
-            Intent intent = new Intent(v.getContext(), TransactionAddition.class);
-            intent.putExtra("key", vCategoryTitle.getText().toString());
-            v.getContext().startActivity(intent);
+            vCategoryTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), TransactionListActivity.class);
+                    intent.putExtra("key", vCategoryTitle.getText().toString());
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 

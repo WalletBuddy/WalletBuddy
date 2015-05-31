@@ -1,68 +1,50 @@
 package com.dalin.my.walletbuddy.adapter;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.widget.ArrayAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Button;
+
 import java.util.List;
 
 import com.dalin.my.walletbuddy.data.CategoryExpenses;
 import com.dalin.my.walletbuddy.R;
 
-public class CategoryExpensesAdapter extends RecyclerView.Adapter<CategoryExpensesAdapter.CategoryExpensesViewHolder>
+public class CategoryExpensesAdapter extends ArrayAdapter<CategoryExpenses>
 {
-    private List<CategoryExpenses> expensesList;
-    private double totalCost = 0;
+    Context context;
+    List<CategoryExpenses> expensesList;
 
-    public CategoryExpensesAdapter(List<CategoryExpenses> expensesList)
+    public CategoryExpensesAdapter(Context context, List<CategoryExpenses> expensesList)
     {
+        super(context, R.layout.list_item_expenses, expensesList);
+        this.context = context;
         this.expensesList = expensesList;
     }
 
-    @Override
-    public CategoryExpensesViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
-    {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.category_card_layout, viewGroup, false);
-        return new CategoryExpensesViewHolder(itemView);
-        //Log.i("TEST", "THISIS A TEST");
-    }
 
     @Override
-    public void onBindViewHolder(CategoryExpensesViewHolder categoryExpensesViewHolder, int i)
+    public View getView(int position, View convertView, ViewGroup parent)
     {
-        String holder = categoryExpensesViewHolder.vCategoryTitle.getText().toString();
-        for(int j = 0; j < expensesList.size(); j++)
-        {
-            if(expensesList.get(j).getCategory().equals(holder))
-            {
-                Double costHolder = expensesList.get(j).getCost();
-                totalCost += costHolder;
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.list_item_expenses, parent, false);
 
-            }
-        }
-        categoryExpensesViewHolder.vTotalExpenses.setText(Double.toString(totalCost));
+        TextView vendorName = (TextView)view.findViewById(R.id.itemVendor);
+        vendorName.setText(expensesList.get(position).getPlace());
 
-    }
+        TextView transactionDate = (TextView)view.findViewById(R.id.itemDate);
+        transactionDate.setText(expensesList.get(position).getUpdatedAt().toString());
 
-    @Override
-    public int getItemCount() {
-        return expensesList.size();
-    }
+        TextView cost = (TextView)view.findViewById(R.id.itemCost);
+        cost.setText(Double.toString(expensesList.get(position).getCost()));
 
-
-    public class CategoryExpensesViewHolder extends RecyclerView.ViewHolder
-    {
-        protected TextView vTotalExpenses;
-        protected TextView vCategoryTitle;
-        protected TextView vTotalTransactions;
-        public CategoryExpensesViewHolder(View v)
-        {
-            super(v);
-            vTotalExpenses = (TextView)v.findViewById(R.id.totalExpenses);
-            vCategoryTitle = (TextView)v.findViewById(R.id.categoryTitle);
-            vTotalTransactions = (TextView)v.findViewById(R.id.totalTransactions);
-        }
+        return view;
     }
 }
+
