@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/itemDate"
         android:text="Date"
-        android:textSize="18dp"
+        android:textSize="14dp"
         android:paddingBottom="16dp"
         android:paddingLeft="10dp"
         android:layout_below="@id/itemVendor"
@@ -30,7 +30,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:text="$0"
-        android:textSize="48dp"
+        android:textSize="30dp"
         android:paddingRight="10dp"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.dalin.my.walletbuddy;
 
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.dalin.my.walletbuddy.adapter.CategoryExpensesAdapter;
@@ -24,7 +26,7 @@ import com.dalin.my.walletbuddy.adapter.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import android.widget.ImageButton;
 import android.app.Activity;
 
 
@@ -37,7 +39,7 @@ public class BudgetCategoryActivity extends ActionBarActivity {
     private TextView titleCategory;
     private TextView addTransaction;
     //private CategoryExpensesAdapter adapter2;
-
+    private ImageButton addCategory;
     private List<CategoryData> array;
     private List<CategoryExpenses> array2;
 
@@ -68,6 +70,18 @@ public class BudgetCategoryActivity extends ActionBarActivity {
                 recList.setAdapter(adapter);
             }
         });
+
+
+        addCategory = (ImageButton)findViewById(R.id.addCommand);
+        addCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(BudgetCategoryActivity.this, SetupActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
          /**
 

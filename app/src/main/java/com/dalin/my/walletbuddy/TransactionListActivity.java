@@ -3,10 +3,14 @@ package com.dalin.my.walletbuddy;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.app.ProgressDialog;
+
+import com.dalin.my.walletbuddy.data.CategoryData;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -36,6 +40,7 @@ public class TransactionListActivity extends ActionBarActivity {
     private CategoryExpensesAdapter expensesAdapter;
     private Intent categoryIntent;
     private String holder;
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,7 @@ public class TransactionListActivity extends ActionBarActivity {
         categoryIntent = getIntent();
         holder = categoryIntent.getStringExtra("key");
         loadAllItems(null, holder);
+        textView = (TextView)findViewById(R.id.categoryBudget);
         editText = (EditText)findViewById(R.id.keywordName);
         listView = (ListView)findViewById(R.id.expensesList);
         searchButton = (Button)findViewById(R.id.searchButton);
@@ -65,6 +71,15 @@ public class TransactionListActivity extends ActionBarActivity {
     {
 
         showProgressDialog();
+        ParseQuery<CategoryData> query1 = ParseQuery.getQuery(CategoryData.class);
+        query1.whereEqualTo("Category", input);
+        query1.getFirstInBackground(new GetCallback<CategoryData>() {
+            @Override
+            public void done(CategoryData categoryData, ParseException e) {
+                textView.setText(Double.toString(categoryData.getTotalCost()));
+            }
+        });
+
         final ParseQuery<CategoryExpenses> query = ParseQuery.getQuery(CategoryExpenses.class);
         if(keyword != null)
         {
@@ -84,6 +99,8 @@ public class TransactionListActivity extends ActionBarActivity {
                 listView.setAdapter(expensesAdapter);
             }
         });
+
+
     }
 
     private void showProgressDialog()
@@ -99,8 +116,9 @@ public class TransactionListActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_transaction_list, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_transaction_list, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -110,6 +128,11 @@ public class TransactionListActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.action_add)
+        {
+            Intent intent = new Intent(TransactionListActivity.this, SetupActivity.class);
+            startActivity(intent);
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;

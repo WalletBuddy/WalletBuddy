@@ -1,6 +1,7 @@
 package com.dalin.my.walletbuddy;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -100,6 +101,16 @@ public class CategoryFragment extends Fragment {
                 data.setTotalCost(0);
                 data.setTotalTransactions(0);
                 data.saveInBackground();
+            }
+        });
+
+
+        Button doneButton = (Button)view.findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BudgetCategoryActivity.class);
+                startActivity(intent);
             }
         });
         return view;
