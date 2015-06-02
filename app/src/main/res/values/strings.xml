@@ -17,4 +17,5 @@
     <string name="title_activity_transaction_addition">TransactionAddition</string>
     <string name="title_activity_list_category_expenses">list_category_expenses</string>
     <string name="title_activity_add_category">AddCategoryActivity</string>
+    <string name="title_activity_update_transaction">UpdateTransactionActivity</string>
 </resources>

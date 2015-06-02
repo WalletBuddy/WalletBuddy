@@ -56,6 +56,10 @@
             android:name=".TransactionAddition"
             android:label="@string/title_activity_transaction_addition" >
         </activity>
+        <activity
+            android:name=".UpdateTransactionActivity"
+            android:label="@string/title_activity_update_transaction" >
+        </activity>
     </application>
 
 </manifest>

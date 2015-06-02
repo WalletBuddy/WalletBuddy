@@ -64,6 +64,16 @@ public class TransactionListActivity extends ActionBarActivity {
 
 
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(TransactionListActivity.this, UpdateTransactionActivity.class);
+                intent.putExtra("parseObjectId", expensesAdapter.getItem(position).getObjectId());
+                startActivity(intent);
+            }
+        });
+
+
     }
 
 
