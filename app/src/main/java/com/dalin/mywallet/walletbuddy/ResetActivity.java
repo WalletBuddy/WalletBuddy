@@ -1,4 +1,4 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;

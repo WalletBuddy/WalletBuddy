@@ -1,16 +1,14 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
-import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.app.ProgressDialog;
 
-import com.dalin.my.walletbuddy.data.CategoryData;
+import com.dalin.mywallet.walletbuddy.data.CategoryData;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -19,8 +17,8 @@ import com.parse.ParseQuery;
 import java.util.List;
 
 
-import com.dalin.my.walletbuddy.adapter.CategoryExpensesAdapter;
-import com.dalin.my.walletbuddy.data.CategoryExpenses;
+import com.dalin.mywallet.walletbuddy.adapter.CategoryExpensesAdapter;
+import com.dalin.mywallet.walletbuddy.data.CategoryExpenses;
 
 import android.view.View;
 import android.widget.AdapterView;

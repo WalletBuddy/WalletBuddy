@@ -1,4 +1,4 @@
-package com.dalin.my.walletbuddy.data;
+package com.dalin.mywallet.walletbuddy.data;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;

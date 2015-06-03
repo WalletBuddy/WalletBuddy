@@ -1,4 +1,4 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
 
 

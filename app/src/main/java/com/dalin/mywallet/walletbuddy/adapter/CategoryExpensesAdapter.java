@@ -1,19 +1,16 @@
-package com.dalin.my.walletbuddy.adapter;
+package com.dalin.mywallet.walletbuddy.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.text.Layout;
 import android.widget.ArrayAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Button;
 
 import java.util.List;
 
-import com.dalin.my.walletbuddy.data.CategoryExpenses;
-import com.dalin.my.walletbuddy.R;
+import com.dalin.mywallet.walletbuddy.data.CategoryExpenses;
+import com.dalin.mywallet.walletbuddy.R;
 
 public class CategoryExpensesAdapter extends ArrayAdapter<CategoryExpenses>
 {

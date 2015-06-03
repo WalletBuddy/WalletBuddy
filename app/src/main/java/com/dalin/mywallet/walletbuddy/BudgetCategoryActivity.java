@@ -1,6 +1,5 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
-import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -14,23 +13,15 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.dalin.my.walletbuddy.adapter.CategoryExpensesAdapter;
-import com.dalin.my.walletbuddy.data.BudgetData;
-import com.dalin.my.walletbuddy.data.CategoryExpenses;
+import com.dalin.mywallet.walletbuddy.data.CategoryExpenses;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.dalin.my.walletbuddy.data.CategoryData;
-import com.dalin.my.walletbuddy.adapter.CategoryAdapter;
+import com.dalin.mywallet.walletbuddy.data.CategoryData;
+import com.dalin.mywallet.walletbuddy.adapter.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.widget.ImageButton;
-import android.app.Activity;
-
-
 
 
 public class BudgetCategoryActivity extends ActionBarActivity {

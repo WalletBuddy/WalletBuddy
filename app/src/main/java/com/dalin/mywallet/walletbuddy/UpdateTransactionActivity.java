@@ -1,9 +1,8 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.internal.widget.TintEditText;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +22,8 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 
-import com.dalin.my.walletbuddy.data.CategoryExpenses;
-import com.dalin.my.walletbuddy.data.CategoryData;
+import com.dalin.mywallet.walletbuddy.data.CategoryExpenses;
+import com.dalin.mywallet.walletbuddy.data.CategoryData;
 
 
 public class UpdateTransactionActivity extends ActionBarActivity

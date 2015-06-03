@@ -1,7 +1,6 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,20 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 
-import com.dalin.my.walletbuddy.data.CategoryData;
-import com.dalin.my.walletbuddy.data.CategoryExpenses;
+import com.dalin.mywallet.walletbuddy.data.CategoryData;
+import com.dalin.mywallet.walletbuddy.data.CategoryExpenses;
 import com.parse.GetCallback;
-import com.parse.LogInCallback;
 import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.ParseACL;
-
-
-
 
 
 public class TransactionAddition extends ActionBarActivity

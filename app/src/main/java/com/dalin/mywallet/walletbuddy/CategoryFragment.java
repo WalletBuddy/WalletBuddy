@@ -1,44 +1,33 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.util.Log;
 import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
 import android.widget.Button;
+import android.support.v4.app.Fragment;
 import android.widget.EditText;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.widget.TextView;
 
 
-import com.dalin.my.walletbuddy.data.BudgetData;
-import com.dalin.my.walletbuddy.adapter.BudgetDataAdapter;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ParseACL;
-
-import java.util.List;
+import com.dalin.mywallet.walletbuddy.data.CategoryData;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BudgetFragment.OnFragmentInteractionListener} interface
+ * {@link CategoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BudgetFragment#newInstance} factory method to
+ * Use the {@link CategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+public class CategoryFragment extends Fragment {
 
-public class BudgetFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -50,10 +39,9 @@ public class BudgetFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    //boolean isUpdate;
 
-    private BudgetDataAdapter budgetAdapter;
-    boolean isUpdate;
-    BudgetData saveData;
+    CategoryData saveData = null;
 
     /**
      * Use this factory method to create a new instance of
@@ -61,11 +49,11 @@ public class BudgetFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BudgetFragment.
+     * @return A new instance of fragment CategoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BudgetFragment newInstance(String param1, String param2) {
-        BudgetFragment fragment = new BudgetFragment();
+    public static CategoryFragment newInstance(String param1, String param2) {
+        CategoryFragment fragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,7 +61,7 @@ public class BudgetFragment extends Fragment {
         return fragment;
     }
 
-    public BudgetFragment() {
+    public CategoryFragment() {
         // Required empty public constructor
     }
 
@@ -85,53 +73,44 @@ public class BudgetFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_budget, container, false);
-        final EditText budgetNumber = (EditText)view.findViewById(R.id.initialBudget);
+        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_category, container, false);
 
-        Button buttonBudget = (Button)view.findViewById(R.id.saveBudgetButton);
-        buttonBudget.setOnClickListener(new View.OnClickListener(){
+        final EditText categoryName = (EditText)view.findViewById(R.id.setCategory);
+        Button buttonCategory = (Button)view.findViewById(R.id.saveCategoryButton);
+        buttonCategory.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
-                final double budgetTemp = Double.parseDouble(budgetNumber.getText().toString());
-                String key = ParseUser.getCurrentUser().getObjectId();
+            public void onClick(View v) {
+                final String categorySave = categoryName.getText().toString();
 
-                ParseQuery<BudgetData> query = ParseQuery.getQuery(BudgetData.class);
-                query.whereEqualTo("user", ParseUser.getCurrentUser());
-                query.getFirstInBackground(new GetCallback<BudgetData>() {
-                    @Override
-                    public void done(BudgetData budgetData, ParseException e) {
-                        //user logins with budget setup
-                        if (budgetData != null) {
-                            budgetData.setBudget(budgetTemp);
-                            budgetData.setRemaining(budgetTemp);
-                            budgetData.saveInBackground();
-                        //user logins with no budget setup
-                        } else if (budgetData == null) {
+                CategoryData data = new CategoryData();
+                data.setACL(new ParseACL(ParseUser.getCurrentUser()));
+                data.setUser(ParseUser.getCurrentUser());
+                data.setCategory(categorySave);
+                data.setTotalCost(0);
+                data.setTotalTransactions(0);
+                data.saveInBackground();
+            }
+        });
 
-                            BudgetData data = new BudgetData();
-                            data.setACL(new ParseACL(ParseUser.getCurrentUser()));
-                            data.setUser(ParseUser.getCurrentUser());
-                            data.setBudget(budgetTemp);
-                            data.setRemaining(budgetTemp);
-                            data.saveInBackground();
-                        }
-                    }
-                });
+
+        Button doneButton = (Button)view.findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BudgetCategoryActivity.class);
+                startActivity(intent);
 
             }
-
         });
         return view;
-        //return inflater.inflate(R.layout.fragment_budget, container, false);
+        //return inflater.inflate(R.layout.fragment_category, container, false);
     }
-
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -157,9 +136,6 @@ public class BudgetFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-
-
 
     /**
      * This interface must be implemented by activities that contain this

@@ -1,4 +1,4 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
 import android.app.Application;
 import com.parse.Parse;
@@ -6,9 +6,9 @@ import com.parse.ParseObject;
 import android.util.Log;
 
 
-import com.dalin.my.walletbuddy.data.BudgetData;
-import com.dalin.my.walletbuddy.data.CategoryData;
-import com.dalin.my.walletbuddy.data.CategoryExpenses;
+import com.dalin.mywallet.walletbuddy.data.BudgetData;
+import com.dalin.mywallet.walletbuddy.data.CategoryData;
+import com.dalin.mywallet.walletbuddy.data.CategoryExpenses;
 
 public class ParseApplication extends Application
 {

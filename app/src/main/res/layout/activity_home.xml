@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <com.dalin.my.walletbuddy.CircleDisplay
+        <com.dalin.mywallet.walletbuddy.CircleDisplay
             android:id="@+id/circleDisplay"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"

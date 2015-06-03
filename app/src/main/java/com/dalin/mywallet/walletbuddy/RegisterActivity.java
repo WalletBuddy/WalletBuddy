@@ -1,106 +1,98 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.content.Intent;
-import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.LogInCallback;
+
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 
-public class MainActivity extends ActionBarActivity {
+public class RegisterActivity extends ActionBarActivity {
 
     private EditText userNameView;
-    private EditText passwordView;
+    private EditText userEmailView;
+    private EditText userPasswordView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
-        userNameView = (EditText)findViewById(R.id.userName);
-        passwordView = (EditText)findViewById(R.id.userPassword);
+        userNameView = (EditText)findViewById(R.id.registerName);
+        userEmailView = (EditText)findViewById(R.id.registerEmail);
+        userPasswordView = (EditText)findViewById(R.id.registerPassword);
 
         Button button1 = (Button)findViewById(R.id.Register);
         button1.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button button2 = (Button)findViewById(R.id.logIn);
-        button2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
                 boolean validationError = false;
-                StringBuilder validationErrorMessage = new StringBuilder("Please ");
-                if(isEmpty(userNameView))
-                {
+                final StringBuilder validationErrorMessage = new StringBuilder("Please ");
+                if(isEmpty(userNameView)){
                     validationError = true;
                     validationErrorMessage.append("enter a username");
                 }
-                if(isEmpty(passwordView))
+                if(isEmpty(userEmailView))
                 {
-                    if(validationError)
-                    {
+                    if(validationError) {
+                       validationErrorMessage.append(", and ");
+                    }
+                    validationError = true;
+                    validationErrorMessage.append("enter an email address");
+                }
+                if(isEmpty(userPasswordView)) {
+                    if(validationError) {
                         validationErrorMessage.append(", and ");
                     }
                     validationError = true;
                     validationErrorMessage.append("enter a password");
                 }
                 validationErrorMessage.append(".");
-
                 if(validationError)
                 {
-                    Toast.makeText(MainActivity.this, validationErrorMessage.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, validationErrorMessage.toString(), Toast.LENGTH_LONG)
+                            .show();
                     return;
                 }
-                final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-                dialog.setTitle("Please wait.");
-                dialog.setMessage("Logging in. Please wait.");
-                dialog.show();
 
-                ParseUser.logInInBackground(userNameView.getText().toString(), passwordView.getText().toString(), new LogInCallback() {
+                final ProgressDialog dialogBox = new ProgressDialog(RegisterActivity.this);
+                dialogBox.setTitle("Please wait...");
+                dialogBox.setMessage("Signing up. Please wait.");
+                dialogBox.show();
+
+
+                ParseUser user = new ParseUser();
+                user.setUsername(userNameView.getText().toString());
+                user.setPassword(userPasswordView.getText().toString());
+                user.setEmail(userEmailView.getText().toString());
+                user.signUpInBackground(new SignUpCallback() {
                     @Override
-                    public void done(ParseUser parseUser, ParseException e) {
+                    public void done(ParseException e) {
+                        dialogBox.dismiss();
                         if(e != null)
                         {
-                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                         else
                         {
-
-                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-
                         }
                     }
                 });
-            }
-        });
 
-
-        TextView forgetPassword = (TextView)findViewById(R.id.resetPassword);
-        forgetPassword.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ResetActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -119,12 +111,13 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_register, menu);
         return true;
+
+
     }
 
     @Override

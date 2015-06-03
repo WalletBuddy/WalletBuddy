@@ -1,4 +1,4 @@
-package com.dalin.my.walletbuddy;
+package com.dalin.mywallet.walletbuddy;
 
 import android.net.Uri;
 import android.support.v4.app.Fragment;

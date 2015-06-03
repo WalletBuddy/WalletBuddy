@@ -1,5 +1,5 @@
-package com.dalin.my.walletbuddy.adapter;
-import com.dalin.my.walletbuddy.data.BudgetData;
+package com.dalin.mywallet.walletbuddy.adapter;
+import com.dalin.mywallet.walletbuddy.data.BudgetData;
 
 import java.util.List;
 import android.content.Context;
@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.dalin.my.walletbuddy.R;
+import com.dalin.mywallet.walletbuddy.R;
 public class BudgetDataAdapter extends ArrayAdapter<BudgetData>
 {
     private Context context;

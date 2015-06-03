@@ -1,4 +1,4 @@
-package com.dalin.my.walletbuddy.adapter;
+package com.dalin.mywallet.walletbuddy.adapter;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,21 +8,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.List;
 
-import com.dalin.my.walletbuddy.TransactionListActivity;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.dalin.mywallet.walletbuddy.TransactionListActivity;
 
-import com.dalin.my.walletbuddy.BudgetCategoryActivity;
-import com.dalin.my.walletbuddy.R;
-import com.dalin.my.walletbuddy.TransactionAddition;
-import com.dalin.my.walletbuddy.data.CategoryData;
-import com.dalin.my.walletbuddy.data.CategoryExpenses;
+import com.dalin.mywallet.walletbuddy.R;
+import com.dalin.mywallet.walletbuddy.TransactionAddition;
+import com.dalin.mywallet.walletbuddy.data.CategoryData;
+import com.dalin.mywallet.walletbuddy.data.CategoryExpenses;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
 {
