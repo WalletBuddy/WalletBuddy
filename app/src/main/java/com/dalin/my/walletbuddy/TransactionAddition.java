@@ -42,6 +42,7 @@ public class TransactionAddition extends ActionBarActivity
     private double trueCost;
     private int trueTransaction;
     double saveHolder;
+    String holder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,7 +51,7 @@ public class TransactionAddition extends ActionBarActivity
         setContentView(R.layout.activity_transaction_addition);
 
         Intent categoryIntent = getIntent();
-        String holder = categoryIntent.getStringExtra("key");
+        holder = categoryIntent.getStringExtra("key");
 
 
         categoryName = (TextView)findViewById(R.id.CategoryName);
@@ -96,6 +97,10 @@ public class TransactionAddition extends ActionBarActivity
 
                     }
                 });
+                Intent intent = new Intent(TransactionAddition.this, TransactionListActivity.class);
+                intent.putExtra("key", holder);
+                startActivity(intent);
+                finish();
             }
         });
 

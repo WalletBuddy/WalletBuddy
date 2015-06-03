@@ -1,5 +1,6 @@
 package com.dalin.my.walletbuddy;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.internal.widget.TintEditText;
@@ -33,6 +34,7 @@ public class UpdateTransactionActivity extends ActionBarActivity
     boolean isUpdate;
     CategoryExpenses loadedData;
     private String deletedCost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class UpdateTransactionActivity extends ActionBarActivity
 
     }
 
-    private void deleteExpensesFromTable(String name, String objectId)
+    private void deleteExpensesFromTable(final String name, String objectId)
     {
         ParseQuery<CategoryExpenses> query = ParseQuery.getQuery(CategoryExpenses.class);
         query.getInBackground(objectId, new GetCallback<CategoryExpenses>() {
@@ -88,34 +90,40 @@ public class UpdateTransactionActivity extends ActionBarActivity
             public void done(CategoryExpenses categoryExpenses, ParseException e)
             {
                 deletedCost = Double.toString(categoryExpenses.getCost());
+
+                ParseQuery<CategoryData> query1 = ParseQuery.getQuery(CategoryData.class);
+                query1.whereEqualTo("Category", name);
+                query1.getFirstInBackground(new GetCallback<CategoryData>() {
+                    @Override
+                    public void done(CategoryData categoryData, ParseException e) {
+                        Double costHolder = categoryData.getTotalCost();
+                        costHolder = costHolder - Double.parseDouble(deletedCost);
+                        categoryData.setTotalCost(costHolder);
+                        int totalTransactions = categoryData.getTotalTransactions();
+                        totalTransactions = totalTransactions - 1;
+                        categoryData.setTotalTransactions(totalTransactions);
+                        categoryData.saveInBackground();
+                        showDeletion(name);
+
+                    }
+                });
                 categoryExpenses.deleteInBackground();
             }
         });
 
-        ParseQuery<CategoryData> query1 = ParseQuery.getQuery(CategoryData.class);
-        query1.whereEqualTo("Category", name);
-        query1.getFirstInBackground(new GetCallback<CategoryData>() {
-            @Override
-            public void done(CategoryData categoryData, ParseException e) {
-                Double costHolder = categoryData.getTotalCost();
-                costHolder = costHolder - Double.parseDouble(deletedCost);
-                categoryData.setTotalCost(costHolder);
-                int totalTransactions = categoryData.getTotalTransactions();
-                totalTransactions = totalTransactions - 1;
-                categoryData.setTotalTransactions(totalTransactions);
-                categoryData.saveInBackground();
-                showDeletion();
-
-            }
-        });
 
     }
-    private void showDeletion()
+    private void showDeletion(final String name)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateTransactionActivity.this);
         builder.setMessage("Entry successfully deleted").setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                Intent intent = new Intent(UpdateTransactionActivity.this, TransactionListActivity.class);
+                intent.putExtra("key", name);
+                startActivity(intent);
+                finish();
 
             }
         })

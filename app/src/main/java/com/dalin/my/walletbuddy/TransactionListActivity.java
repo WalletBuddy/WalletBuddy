@@ -1,5 +1,6 @@
 package com.dalin.my.walletbuddy;
 
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.content.Intent;
@@ -41,6 +43,8 @@ public class TransactionListActivity extends ActionBarActivity {
     private Intent categoryIntent;
     private String holder;
     private TextView textView;
+    private ImageButton add;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,17 @@ public class TransactionListActivity extends ActionBarActivity {
         textView = (TextView)findViewById(R.id.categoryBudget);
         editText = (EditText)findViewById(R.id.keywordName);
         listView = (ListView)findViewById(R.id.expensesList);
+        add = (ImageButton)findViewById(R.id.addCommand);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TransactionListActivity.this, TransactionAddition.class);
+                intent.putExtra("key", holder);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         searchButton = (Button)findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +85,13 @@ public class TransactionListActivity extends ActionBarActivity {
                 Intent intent = new Intent(TransactionListActivity.this, UpdateTransactionActivity.class);
                 intent.putExtra("parseObjectId", expensesAdapter.getItem(position).getObjectId());
                 startActivity(intent);
+                finish();
+
             }
         });
+
+
+
 
 
     }
@@ -140,8 +160,7 @@ public class TransactionListActivity extends ActionBarActivity {
 
         if (id == R.id.action_add)
         {
-            Intent intent = new Intent(TransactionListActivity.this, SetupActivity.class);
-            startActivity(intent);
+          //
         }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {

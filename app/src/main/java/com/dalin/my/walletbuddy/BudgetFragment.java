@@ -110,6 +110,7 @@ public class BudgetFragment extends Fragment {
                         //user logins with budget setup
                         if (budgetData != null) {
                             budgetData.setBudget(budgetTemp);
+                            budgetData.setRemaining(budgetTemp);
                             budgetData.saveInBackground();
                         //user logins with no budget setup
                         } else if (budgetData == null) {
@@ -118,6 +119,7 @@ public class BudgetFragment extends Fragment {
                             data.setACL(new ParseACL(ParseUser.getCurrentUser()));
                             data.setUser(ParseUser.getCurrentUser());
                             data.setBudget(budgetTemp);
+                            data.setRemaining(budgetTemp);
                             data.saveInBackground();
                         }
                     }
