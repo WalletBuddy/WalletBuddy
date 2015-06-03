@@ -38,15 +38,15 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:label="WalletBuddy" >
+            android:label="Budget Overview" >
         </activity>
         <activity
             android:name=".TransactionListActivity"
-            android:label="WalletBuddy" >
+            android:label="Transaction List" >
         </activity>
         <activity
             android:name=".BudgetCategoryActivity"
-            android:label="WalletBuddy" >
+            android:label="Categories" >
         </activity>
         <activity
             android:name=".SetupActivity"
@@ -54,11 +54,11 @@
         </activity>
         <activity
             android:name=".TransactionAddition"
-            android:label="@string/title_activity_transaction_addition" >
+            android:label="Add Transaction" >
         </activity>
         <activity
             android:name=".UpdateTransactionActivity"
-            android:label="@string/title_activity_update_transaction" >
+            android:label="Update Transaction" >
         </activity>
     </application>
 

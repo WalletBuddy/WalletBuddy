@@ -36,6 +36,8 @@ public class HomeActivity extends ActionBarActivity {
     private double remainHolder;
     private double maxHolder;
     private ListView listView;
+    private TextView initBudget;
+    private TextView remaining;
     private CategoryExpensesAdapter expensesAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,8 @@ public class HomeActivity extends ActionBarActivity {
         loadAllItems();
         listView = (ListView)findViewById(R.id.recentList);
 
-        final TextView initBudget = (TextView)findViewById(R.id.StartingBudget);
+        initBudget = (TextView)findViewById(R.id.StartingBudget);
+        remaining = (TextView)findViewById(R.id.CurrentRemaining);
 
         TextView transactionList = (TextView)findViewById(R.id.RecentTransactions);
         transactionList.setOnClickListener(new View.OnClickListener(){
@@ -80,8 +83,11 @@ public class HomeActivity extends ActionBarActivity {
                             budgetData.saveInBackground();
                             Log.i("SFOSWIfWSOEFWEF", Double.toString(totalCost));
                             Log.i("FFFFFFFFFF", Double.toString(remainHolder));
+                            initBudget.setText(String.format("Starting Budget: $%.2f", budgetData.getBudget()));
+                            remaining.setText(String.format("Remaining: $%.2f", budgetData.getRemaining()));
+
                             CircleDisplay cd = (CircleDisplay) findViewById(R.id.circleDisplay);
-                            cd.setAnimDuration(2000);
+                            cd.setAnimDuration(1000);
                             cd.setFormatDigits(2);
                             cd.setValueWidthPercent(55f);
                             cd.setTextSize(18f);
@@ -92,6 +98,8 @@ public class HomeActivity extends ActionBarActivity {
                             cd.setStepSize(0.5f);
                             // cd.setCustomText(...); // sets a custom array of text
                             cd.showValue((float) totalCost, (float) maxHolder, true);
+
+
                             Log.i("---------------", Double.toString(maxHolder));
                             cd.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -144,6 +152,7 @@ public class HomeActivity extends ActionBarActivity {
     {
         ParseQuery<CategoryExpenses> query = ParseQuery.getQuery(CategoryExpenses.class);
         query.setLimit(3);
+        query.addDescendingOrder("updatedAt");
         query.findInBackground(new FindCallback<CategoryExpenses>() {
             @Override
             public void done(List<CategoryExpenses> categoryExpensesList, ParseException e) {

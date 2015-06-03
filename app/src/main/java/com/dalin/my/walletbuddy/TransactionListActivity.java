@@ -3,6 +3,7 @@ package com.dalin.my.walletbuddy;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -96,6 +97,19 @@ public class TransactionListActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent intent = new Intent(this, BudgetCategoryActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
     private void loadAllItems(String keyword, String input)
     {
@@ -105,8 +119,11 @@ public class TransactionListActivity extends ActionBarActivity {
         query1.whereEqualTo("Category", input);
         query1.getFirstInBackground(new GetCallback<CategoryData>() {
             @Override
-            public void done(CategoryData categoryData, ParseException e) {
-                textView.setText(Double.toString(categoryData.getTotalCost()));
+            public void done(CategoryData categoryData, ParseException e)
+            {
+                //String holder = Double.toString(categoryData.getTotalCost());
+                textView.setText(String.format("Total: $%.2f", categoryData.getTotalCost()));
+                //textView.setText(Double.toString(categoryData.getTotalCost()));
             }
         });
 
@@ -143,12 +160,14 @@ public class TransactionListActivity extends ActionBarActivity {
         progress.dismiss();
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_transaction_list, menu);
-        return super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.menu_transaction_list, menu);
+        return true;
     }
 
     @Override
@@ -158,10 +177,6 @@ public class TransactionListActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_add)
-        {
-          //
-        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;

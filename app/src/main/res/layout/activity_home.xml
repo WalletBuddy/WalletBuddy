@@ -15,17 +15,9 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/BudgetHeader"
-            android:text="Budget Overview"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
             android:id="@+id/StartingBudget"
             android:text="Starting Budget: "
+            android:textSize="20dp"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:layout_width="wrap_content"
@@ -39,9 +31,10 @@
             android:layout_height="200dp" />
 
         <TextView
-            android:id="@+id/CurrentBudget"
+            android:id="@+id/CurrentRemaining"
             android:text="Remaining amount"
             android:layout_gravity="center"
+            android:textSize="20dp"
             android:layout_marginBottom="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

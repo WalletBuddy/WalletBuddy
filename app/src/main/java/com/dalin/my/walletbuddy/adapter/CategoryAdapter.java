@@ -53,7 +53,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         CategoryData cd = categoryList.get(i);
         categoryViewHolder.vCategoryTitle.setText(cd.getCategory());
-        categoryViewHolder.vTotalExpenses.setText(Double.toString(cd.getTotalCost()));
+        //categoryViewHolder.vTotalExpenses.setText(Double.toString(cd.getTotalCost()));
+        categoryViewHolder.vTotalExpenses.setText(String.format("$%.2f", cd.getTotalCost()));
         categoryViewHolder.vTotalTransactions.setText(Integer.toString(cd.getTotalTransactions()));
         String holder = categoryViewHolder.vCategoryTitle.getText().toString();
         Log.i("String", holder);

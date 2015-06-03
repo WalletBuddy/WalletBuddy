@@ -111,6 +111,7 @@ public class CategoryFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BudgetCategoryActivity.class);
                 startActivity(intent);
+
             }
         });
         return view;

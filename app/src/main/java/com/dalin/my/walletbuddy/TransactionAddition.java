@@ -44,6 +44,7 @@ public class TransactionAddition extends ActionBarActivity
     double saveHolder;
     String holder;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

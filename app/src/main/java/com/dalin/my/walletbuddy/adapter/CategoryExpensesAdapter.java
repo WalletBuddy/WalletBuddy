@@ -42,7 +42,7 @@ public class CategoryExpensesAdapter extends ArrayAdapter<CategoryExpenses>
         transactionDate.setText(expensesList.get(position).getUpdatedAt().toString());
 
         TextView cost = (TextView)view.findViewById(R.id.itemCost);
-        cost.setText(Double.toString(expensesList.get(position).getCost()));
+        cost.setText(String.format("$%.2f", expensesList.get(position).getCost()));
 
         return view;
     }
