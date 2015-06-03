@@ -42,6 +42,7 @@
         </activity>
         <activity
             android:name=".TransactionListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:label="Transaction List" >
         </activity>
         <activity

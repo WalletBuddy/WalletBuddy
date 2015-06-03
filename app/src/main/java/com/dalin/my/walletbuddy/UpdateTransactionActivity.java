@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.internal.widget.TintEditText;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,8 +16,10 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 import com.parse.GetCallback;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 
@@ -34,7 +37,8 @@ public class UpdateTransactionActivity extends ActionBarActivity
     boolean isUpdate;
     CategoryExpenses loadedData;
     private String deletedCost;
-
+    private double trueCostHolder;
+    private double realTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,31 +139,52 @@ public class UpdateTransactionActivity extends ActionBarActivity
         String name = vendorName.getText().toString();
         String cat = catName.getText().toString();
         String total = cost.getText().toString();
-        Double realTotal = Double.parseDouble(total);
+        realTotal = Double.parseDouble(total);
 
 
         CategoryExpenses c = isUpdate ? loadedData : new CategoryExpenses();
+        final double oldCost = c.getCost();
         c.setCategory(cat);
         c.setPlace(name);
         c.setCost(realTotal);
 
 
+        ParseQuery<CategoryData> query = ParseQuery.getQuery(CategoryData.class);
+        query.whereEqualTo("Category", catName.getText().toString());
+        query.getFirstInBackground(new GetCallback<CategoryData>() {
+            @Override
+            public void done(CategoryData categoryData, ParseException e) {
+                categoryData.setACL(new ParseACL(ParseUser.getCurrentUser()));
+                categoryData.setUser(ParseUser.getCurrentUser());
+                trueCostHolder = categoryData.getTotalCost();
+                trueCostHolder = trueCostHolder - oldCost;
+                trueCostHolder = trueCostHolder + realTotal;
+                categoryData.setTotalCost(trueCostHolder);
+                categoryData.saveInBackground();
+
+            }
+        });
         c.saveEventually(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                showConfirmation();
+                showConfirmation(catName.getText().toString());
             }
         });
 
     }
 
-    private void showConfirmation()
+    private void showConfirmation(final String name)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateTransactionActivity.this);
         builder.setMessage(isUpdate ?  "Transaction updated successfully." : "Transaction added").setPositiveButton("OK", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // do nothing
+                Intent intent = new Intent(UpdateTransactionActivity.this, TransactionListActivity.class);
+                Log.i("1111111111111111", name);
+                intent.putExtra("key", name);
+                startActivity(intent);
+                finish();
+
             }
         })
         .setTitle(isUpdate ? "Updated Transaction" : "Add Transaction");
