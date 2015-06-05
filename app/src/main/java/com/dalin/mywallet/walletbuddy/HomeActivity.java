@@ -46,13 +46,6 @@ public class HomeActivity extends ActionBarActivity {
         remaining = (TextView)findViewById(R.id.CurrentRemaining);
 
         TextView transactionList = (TextView)findViewById(R.id.RecentTransactions);
-        transactionList.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, TransactionListActivity.class);
-                startActivity(intent);
-            }
-        });
 
         final ParseQuery<CategoryData> query1 = ParseQuery.getQuery(CategoryData.class);
         query1.findInBackground(new FindCallback<CategoryData>()
